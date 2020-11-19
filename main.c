@@ -9,20 +9,32 @@ int main(int argc, char *argv[]) {
 	FILE *fp;
 	//char c;
 	char str[100];
+	char path[100];
+	char lookup[100];
 	
-	fp = fopen("sample.txt", "r");
+	printf("input file path:");
+	scanf("%s", path);
+	printf("input search word:");
+	scanf("%s", lookup);
+	
+	fp = fopen(path, "r");
 	if (fp == NULL)
 	{
+		printf("invalid path! (%s)\n", path);
 		return -1;
 	}
 	
-	//while ( (c=fgetc(fp)) != EOF){
+	
 	while ( fgets(str,100, fp) != NULL){
-	
-		//printf("%c", c);
-		printf("%s", str);
+	 //strncmp
+	 	if (strncmp(str, lookup, strlen(lookup) )== 0)
+	 	{
+	 		printf("search! \n");
+	 		fclose(fp);
+	 		return 0;
+		 }
 	}
-	
+	printf("search failed..\n");
 	fclose(fp);
 
 return 0;
